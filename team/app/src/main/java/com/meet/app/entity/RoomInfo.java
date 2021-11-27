@@ -33,7 +33,6 @@ public class RoomInfo {
     private LocalDate startDate;
 
     // 모임 끝 날짜
-    @NotNull
     private LocalDate endDate;
 
     @NotNull

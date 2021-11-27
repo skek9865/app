@@ -12,7 +12,7 @@ public interface RoomInfoService {
 
     Long roomRegister(RoomInfoDTO roomInfoDTO);
 
-    List<RoomInfoDTO> roomList(String id);
+    List<RoomInfoDTO> roomList(String memberID);
 
     RoomInfoDTO roomRead(Long roomID);
 

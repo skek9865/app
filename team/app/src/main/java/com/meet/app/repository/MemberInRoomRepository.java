@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberInRoomRepository extends JpaRepository<MemberInRoom,Long> {
 
     @Query("select mr.member.id from MemberInRoom mr where mr.roomInfo.id =:id and mr.isRoomMaster = true")
-    String getMemberID(@Param("id")Long id);
+    Optional<String> getMemberID(@Param("id")Long id);
 
     @Query("select mr from MemberInRoom mr where mr.roomInfo.id =:roomID")
     List<MemberInRoom> getMemberRoom(@Param("roomID") Long id);

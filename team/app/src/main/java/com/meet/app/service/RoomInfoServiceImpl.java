@@ -46,11 +46,13 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
     // 모임 리스트 출력
     @Override
-    public List<RoomInfoDTO> roomList(String id) {
+    public List<RoomInfoDTO> roomList(String memberID) {
 
-        log.info("memberID : " + id);
+        log.info("memberID : " + memberID);
 
-        Integer schoolNum = memberRepository.getSchoolName(id);
+        Optional<Integer> result = memberRepository.getSchoolNum(memberID);
+
+        Integer schoolNum = result.get();
 
         List<RoomInfo> roomInfoList = roomInfoRepository.getList(schoolNum, Sort.by("id").descending());
 
@@ -58,11 +60,14 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
         roomInfoList.forEach(entity -> {
 
+            // 삭제 되지 않은 방 검색
             if(!entity.isEnd()){
 
-                String memberID = memberInRoomRepository.getMemberID(entity.getId());
+                Optional<String> getMasterID = memberInRoomRepository.getMemberID(entity.getId());
 
-                RoomInfoDTO dto = entityToDTO(entity, memberID);
+                String masterID = getMasterID.get();
+
+                RoomInfoDTO dto = entityToDTO(entity, masterID);
 
                 dtoList.add(dto);
             }
@@ -75,11 +80,15 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     @Override
     public RoomInfoDTO roomRead(Long roomID) {
 
-        RoomInfo roomInfo = roomInfoRepository.findById(roomID).get();
+        Optional<RoomInfo> getRoom = roomInfoRepository.findById(roomID);
 
-        String memberID = memberInRoomRepository.getMemberID(roomInfo.getId());
+        RoomInfo roomInfo = getRoom.get();
 
-        RoomInfoDTO roomInfoDTO = entityToDTO(roomInfo, memberID);
+        Optional<String> getMasterID = memberInRoomRepository.getMemberID(roomInfo.getId());
+
+        String masterID = getMasterID.get();
+
+        RoomInfoDTO roomInfoDTO = entityToDTO(roomInfo, masterID);
 
         roomInfoRepository.plusViews(roomID);
 
@@ -109,7 +118,9 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
             MemberInRoom memberInRoom = (MemberInRoom) entity[1];
 
-            String masterID = memberInRoomRepository.getMemberID(roomInfo.getId());
+            Optional<String> getMasterID = memberInRoomRepository.getMemberID(roomInfo.getId());
+
+            String masterID = getMasterID.get();
 
             RoomInfoDTO roomInfoDTO = entityToDTO(roomInfo, masterID);
 
@@ -140,7 +151,9 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
         log.info("memberID : " + memberID);
 
-        Integer schoolNum = memberRepository.getSchoolName(memberID);
+        Optional<Integer> getSchoolNum = memberRepository.getSchoolNum(memberID);
+
+        Integer schoolNum = getSchoolNum.get();
 
         List<RoomInfo> hotRoom = roomInfoRepository.getHotRoom(schoolNum);
 

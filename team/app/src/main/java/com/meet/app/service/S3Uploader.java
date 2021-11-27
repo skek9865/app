@@ -35,15 +35,17 @@ public class S3Uploader {
 
     public void upload(RoomFaceImageDTO roomFaceImageDTO, String dirName) throws IOException {
 
+        // 이미지 이름을 uuid로 지정
         String uuid = UUID.randomUUID().toString();
 
+        // Base64 형식을 byte[] 로 변환
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] decodedBytes = decoder.decode(roomFaceImageDTO.getFileBase64().getBytes());
 
+        // byte[] 형식을 MutipartFile 로 변환
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(decodedBytes);
         byteArrayOutputStream.flush();
-
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         MultipartFile file = new MockMultipartFile(uuid,byteArrayInputStream.readAllBytes());
 
@@ -95,7 +97,9 @@ public class S3Uploader {
 
     public String getImg(Long roomID){
 
-        RoomFaceImage image = roomFaceImageRepository.getImage(roomID);
+        Optional<RoomFaceImage> getRoomImg = roomFaceImageRepository.getImage(roomID);
+
+        RoomFaceImage image = getRoomImg.get();
 
         return image.getPath();
     }

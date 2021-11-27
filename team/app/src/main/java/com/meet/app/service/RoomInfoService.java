@@ -14,7 +14,7 @@ public interface RoomInfoService {
 
     List<RoomInfoDTO> roomList(String id);
 
-    RoomInfoDTO roomRead(Long id);
+    RoomInfoDTO roomRead(Long roomID);
 
     void deleteRoom(Long roomID);
 
@@ -23,6 +23,8 @@ public interface RoomInfoService {
     void reStartRoom(Long roomID);
 
     void endRoom(Long roomID);
+
+    List<RoomInfoDTO> hotRoomList(String memberID);
 
     default RoomInfoDTO entityToDTO(RoomInfo roomInfo, String memberID){
 

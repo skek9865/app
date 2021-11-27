@@ -33,4 +33,7 @@ public interface RoomInfoRepository extends JpaRepository<RoomInfo,Long> {
 
     @Query(value = "update Room_info set is_end = true where id =:roomID", nativeQuery = true)
     void endRoom(@Param("roomID")Long roomID);
+
+    @Query(value = "select * from Room_Info r where r.school_id =:schoolNum and r.maximum_people > 2 and r.is_Del = false order by r.maximum_people - r.present_people asc , r.present_people desc,  r.views desc limit 10", nativeQuery = true)
+    List<RoomInfo> getHotRoom(@Param("schoolNum") Integer schoolNum);
 }

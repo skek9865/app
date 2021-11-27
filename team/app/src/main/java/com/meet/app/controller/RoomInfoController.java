@@ -97,4 +97,15 @@ public class RoomInfoController {
 
         return HttpStatus.OK;
     }
+
+    // 모집 임박 리스트
+    @PostMapping("/hotRoomList")
+    public ResponseEntity<List<RoomInfoDTO>> hotRoomList(@RequestBody MemberDTO memberDTO){
+
+        log.info("memberDTO : " + memberDTO);
+
+        List<RoomInfoDTO> roomInfoDTOS = roomInfoService.hotRoomList(memberDTO.getMemberID());
+
+        return new ResponseEntity<>(roomInfoDTOS, HttpStatus.OK);
+    }
 }

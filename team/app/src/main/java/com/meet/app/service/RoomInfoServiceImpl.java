@@ -73,15 +73,15 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
     // 모임 세부 페이지
     @Override
-    public RoomInfoDTO roomRead(Long id) {
+    public RoomInfoDTO roomRead(Long roomID) {
 
-        RoomInfo roomInfo = roomInfoRepository.findById(id).get();
+        RoomInfo roomInfo = roomInfoRepository.findById(roomID).get();
 
         String memberID = memberInRoomRepository.getMemberID(roomInfo.getId());
 
         RoomInfoDTO roomInfoDTO = entityToDTO(roomInfo, memberID);
 
-        roomInfoRepository.plusViews(id);
+        roomInfoRepository.plusViews(roomID);
 
         return roomInfoDTO;
     }
@@ -132,5 +132,27 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     public void endRoom(Long roomID) {
 
         roomInfoRepository.endRoom(roomID);
+    }
+
+    // 모집 임박 리스트 출력
+    @Override
+    public List<RoomInfoDTO> hotRoomList(String memberID) {
+
+        log.info("memberID : " + memberID);
+
+        Integer schoolNum = memberRepository.getSchoolName(memberID);
+
+        List<RoomInfo> hotRoom = roomInfoRepository.getHotRoom(schoolNum);
+
+        List<RoomInfoDTO> hotRoomDTOS = new ArrayList<>();
+
+        hotRoom.forEach(entity -> {
+
+            RoomInfoDTO roomInfoDTO = entityToDTO(entity, memberID);
+
+            hotRoomDTOS.add(roomInfoDTO);
+        });
+
+        return hotRoomDTOS;
     }
 }

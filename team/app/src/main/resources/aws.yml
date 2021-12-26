@@ -1,0 +1,6 @@
+cloud:
+  aws:
+    s3:
+      bucket: hyostorage
+    stack:
+      auto: false

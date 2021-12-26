@@ -79,12 +79,18 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 세부 페이지
     @Override
     public RoomInfoDTO roomRead(Long roomID) {
+        
+        log.info(roomID);
 
         Optional<RoomInfo> getRoom = roomInfoRepository.findById(roomID);
+        
+        log.info(roomID);
 
         RoomInfo roomInfo = getRoom.get();
 
         Optional<String> getMasterID = memberInRoomRepository.getMemberID(roomInfo.getId());
+        
+        log.info(roomID);
 
         String masterID = getMasterID.get();
 

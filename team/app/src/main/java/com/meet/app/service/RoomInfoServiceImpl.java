@@ -23,7 +23,6 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     private final MemberInRoomRepository memberInRoomRepository;
     private final MemberRepository memberRepository;
 
-
     // 모임 생성
     @Transactional
     @Override
@@ -79,20 +78,14 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 세부 페이지
     @Override
     public RoomInfoDTO roomRead(Long roomID) {
-        
-        log.info(roomID);
 
         log.info("roomID : " + roomID);
 
         Optional<RoomInfo> getRoom = roomInfoRepository.findById(roomID);
-        
-        log.info(roomID);
 
         RoomInfo roomInfo = getRoom.get();
 
         Optional<String> getMasterID = memberInRoomRepository.getMemberID(roomInfo.getId());
-        
-        log.info(roomID);
 
         String masterID = getMasterID.get();
 
@@ -149,7 +142,6 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 모집 마감
     @Override
     public void endRoom(Long roomID) {
-
         roomInfoRepository.endRoom(roomID);
     }
 

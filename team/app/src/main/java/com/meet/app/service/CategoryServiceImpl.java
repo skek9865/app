@@ -4,13 +4,13 @@ import com.meet.app.dto.CategoryDTO;
 import com.meet.app.entity.Category;
 import com.meet.app.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService{
 

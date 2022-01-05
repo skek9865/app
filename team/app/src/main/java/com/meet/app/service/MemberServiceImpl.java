@@ -4,14 +4,14 @@ import com.meet.app.dto.MemberDTO;
 import com.meet.app.entity.Member;
 import com.meet.app.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 

@@ -5,7 +5,7 @@ import com.meet.app.dto.RoomInfoDTO;
 import com.meet.app.entity.*;
 import com.meet.app.repository.*;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class RoomInfoServiceImpl implements RoomInfoService {
 
     private final RoomInfoRepository roomInfoRepository;
@@ -79,6 +79,8 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 세부 페이지
     @Override
     public RoomInfoDTO roomRead(Long roomID) {
+
+        log.info("roomID : " + roomID);
 
         Optional<RoomInfo> getRoom = roomInfoRepository.findById(roomID);
 

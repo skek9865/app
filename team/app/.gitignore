@@ -37,5 +37,4 @@ out/
 .vscode/
 
 ### my ignore ###
-src/main/resources/
-src/test/
+src/main/resources/s3.yml

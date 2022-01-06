@@ -26,8 +26,8 @@ public class PrisonServiceImpl implements PrisonService{
 
         log.info("prisonDTO : " + prisonDTO);
 
-        Optional<Member> member2 = memberRepository.findById(memberID);
-        Optional<Member> member1 = memberRepository.findById(prisonDTO.getBadMemberID());
+        Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
+        Optional<Member> member1 = memberRepository.findById(memberID);
 
         Member member = member1.get();
         Member badMember = member2.get();

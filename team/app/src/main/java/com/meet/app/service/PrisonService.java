@@ -14,6 +14,8 @@ public interface PrisonService {
 
     List<PrisonDTO> getList();
 
+    void modify(PrisonDTO prisonDTO, String memberID);
+
     void delete(Long id);
 
     default Prison dtoToEntity(PrisonDTO prisonDTO, Member member, Member badMember){

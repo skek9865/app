@@ -26,8 +26,13 @@ public class PrisonServiceImpl implements PrisonService{
 
         log.info("prisonDTO : " + prisonDTO);
 
+<<<<<<< HEAD
         Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
         Optional<Member> member1 = memberRepository.findById(memberID);
+=======
+        Optional<Member> member1 = memberRepository.findById(memberID);
+        Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
+>>>>>>> master
 
         Member member = member1.get();
         Member badMember = member2.get();
@@ -60,6 +65,27 @@ public class PrisonServiceImpl implements PrisonService{
         });
 
         return prisonDTOS;
+    }
+
+    @Override
+    public void modify(PrisonDTO prisonDTO, String memberID) {
+        Optional<Prison> result = prisonRepository.findById(prisonDTO.getId());
+        Optional<Member> member1 = memberRepository.findById(memberID);
+        Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
+
+        Prison entity = result.get();
+        Member member = member1.get();
+        Member badMember = member2.get();
+
+        Prison prison = Prison.builder()
+                .id(entity.getId())
+                .title(prisonDTO.getTitle())
+                .content(prisonDTO.getContent())
+                .member(member)
+                .bad(badMember)
+                .build();
+
+        prisonRepository.save(prison);
     }
 
     @Override

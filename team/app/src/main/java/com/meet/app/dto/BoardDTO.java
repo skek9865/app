@@ -22,4 +22,5 @@ public class BoardDTO {
     private Long roomID;
 
     private String memberID;
+
 }

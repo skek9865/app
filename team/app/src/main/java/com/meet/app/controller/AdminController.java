@@ -38,6 +38,8 @@ public class AdminController {
     //게시판 관리
     private final BoardRepository boardRepository;
 
+    //채팅방 관리
+
     //신고 관리
     private final PrisonService prisonService;
 
@@ -70,7 +72,13 @@ public class AdminController {
         return roomInfoRepository.findAll();
     }
 
-    @PostMapping("/room/remove/{id}")
+//    @GetMapping("/room/board/{id}")
+//    public List<BoardDTO> getBoardList(@PathVariable("id") Long id) {
+//
+//    }
+
+
+    @DeleteMapping("/room/remove/{id}")
     public void removeRoom(@PathVariable("id") Long id) {
         log.info("admin - removeRoom" +roomInfoService.roomRead(id));
         roomInfoService.deleteRoom(id);
@@ -84,7 +92,7 @@ public class AdminController {
         return boardRepository.findAll();
     }
 
-    @PostMapping("/board/remove/{id}")
+    @DeleteMapping("/board/remove/{id}")
     public void removeBoard(@PathVariable("id") Long id) {
         log.info("admin - BoardRemove" + boardRepository.findById(id).get());
         boardRepository.deleteById(id);
@@ -95,9 +103,4 @@ public class AdminController {
 
     // --------------- 신고 관리 -----------------------------
 
-    @GetMapping("/prison")
-    public List<PrisonDTO> getPrisonList() {
-        log.info("admin - PrisonList");
-        return prisonService.getList();
-    }
 }

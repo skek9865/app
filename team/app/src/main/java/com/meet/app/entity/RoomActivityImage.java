@@ -22,7 +22,7 @@ public class RoomActivityImage {
     @NotNull
     private String path;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     private Board board;
 }

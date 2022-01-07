@@ -22,7 +22,7 @@ public class MemberFaceImage {
     @NotNull
     private String path;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @NotNull
     private Member member;
 }

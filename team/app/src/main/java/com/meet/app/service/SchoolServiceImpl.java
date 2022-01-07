@@ -20,7 +20,7 @@ public class SchoolServiceImpl implements SchoolService{
     // 학교 생성
     @Override
     public void register(SchoolDTO schoolDTO) {
-
+        log.info("SchoolService - register");
         log.info("schoolDTO : " + schoolDTO);
 
         School school = School.builder()
@@ -32,14 +32,14 @@ public class SchoolServiceImpl implements SchoolService{
 
     // 학교 불러오기
     @Override
-    public SchoolDTO read(Integer id) {
-
+    public SchoolDTO getOne(Integer id) {
+        log.info("SchoolService - getOne");
         log.info("id : " + id);
 
         School school = schoolRepository.findById(id).get();
 
         SchoolDTO dto = SchoolDTO.builder()
-                .id(school.getId())
+                .schoolID(school.getId())
                 .name(school.getName())
                 .build();
 
@@ -49,6 +49,7 @@ public class SchoolServiceImpl implements SchoolService{
     // 학교 리스트
     @Override
     public List<SchoolDTO> getList() {
+        log.info("SchoolService - getList");
 
         List<School> results = schoolRepository.findAll();
 
@@ -56,7 +57,7 @@ public class SchoolServiceImpl implements SchoolService{
 
         results.forEach(result -> {
 
-            SchoolDTO dto = SchoolDTO.builder().id(result.getId()).name(result.getName()).build();
+            SchoolDTO dto = SchoolDTO.builder().schoolID(result.getId()).name(result.getName()).build();
 
             dtoList.add(dto);
         });

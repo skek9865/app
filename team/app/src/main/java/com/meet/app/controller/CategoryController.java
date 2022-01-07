@@ -20,10 +20,10 @@ public class CategoryController {
 
     @PostMapping("/register")
     public HttpStatus register(@RequestBody CategoryDTO categoryDTO){
-
+        log.info("CategoryController - register");
         log.info("categoryDTO : " + categoryDTO);
 
-        categoryService.categoryRegister(categoryDTO);
+        categoryService.register(categoryDTO);
 
         return HttpStatus.OK;
     }

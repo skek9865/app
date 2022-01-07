@@ -20,7 +20,7 @@ public class SchoolController {
 
     @PostMapping("/register")
     public HttpStatus register(@RequestBody SchoolDTO schoolDTO){
-
+        log.info("SchoolController - register");
         log.info("schoolDTO : " + schoolDTO);
 
         schoolService.register(schoolDTO);

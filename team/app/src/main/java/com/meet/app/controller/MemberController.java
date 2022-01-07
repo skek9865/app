@@ -7,7 +7,6 @@ import com.meet.app.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -23,7 +22,7 @@ public class MemberController {
 
     @PostMapping("/register")
     public HttpStatus register(@RequestBody MemberDTO memberDTO){
-
+        log.info("MemberController - register");
         log.info("memberDTO : " + memberDTO);
 
         memberService.register(memberDTO);
@@ -33,16 +32,11 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> member) {
+        log.info("MemberController - login");
+        log.info("member : " + member);
 
         Member login = memberService.login(member);
 
         return jwtTokenProvider.createToken(login.getId(), login.getRoles());
-    }
-
-    @GetMapping("/user/who")
-    public MemberDTO who(@RequestHeader("JWT-TOKEN") String token) {
-        String memberPk = jwtTokenProvider.getMemberPk(token);
-
-        return memberService.getMember(memberPk);
     }
 }

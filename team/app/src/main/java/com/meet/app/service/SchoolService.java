@@ -8,7 +8,7 @@ public interface SchoolService {
 
     void register(SchoolDTO schoolDTO);
 
-    SchoolDTO read(Integer id);
+    SchoolDTO getOne(Integer id);
 
     List<SchoolDTO> getList();
 }

@@ -3,8 +3,6 @@ package com.meet.app.service;
 import com.meet.app.dto.MemberDTO;
 import com.meet.app.entity.Member;
 import com.meet.app.entity.School;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +15,11 @@ public interface MemberService {
 
     List<MemberDTO> getList();
 
-    MemberDTO getMember(String id);
+    MemberDTO getOne(String id);
 
-    void modifyMember(MemberDTO memberDTO);
+    void modify(MemberDTO memberDTO);
 
-    void deleteMember(MemberDTO memberDTO);
+    void remove(MemberDTO memberDTO);
 
     default Member dtoToEntity(MemberDTO memberDTO){
 

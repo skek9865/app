@@ -26,7 +26,9 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 생성
     @Transactional
     @Override
-    public Long roomRegister(RoomInfoDTO roomInfoDTO) {
+    public Long register(RoomInfoDTO roomInfoDTO) {
+        log.info("RoomInfoService - register");
+        log.info("roomInfoDTO : " + roomInfoDTO);
 
         Optional<Member> memberResult = memberRepository.findById(roomInfoDTO.getMemberID());
 
@@ -45,8 +47,8 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
     // 모임 리스트 출력
     @Override
-    public List<RoomInfoDTO> roomList(String memberID) {
-
+    public List<RoomInfoDTO> getList(String memberID) {
+        log.info("RoomInfoService - getList");
         log.info("memberID : " + memberID);
 
         Optional<Integer> result = memberRepository.getSchoolNum(memberID);
@@ -77,8 +79,8 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 
     // 모임 세부 페이지
     @Override
-    public RoomInfoDTO roomRead(Long roomID) {
-
+    public RoomInfoDTO getOne(Long roomID) {
+        log.info("RoomInfoService - getOne");
         log.info("roomID : " + roomID);
 
         Optional<RoomInfo> getRoom = roomInfoRepository.findById(roomID);
@@ -99,7 +101,10 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 삭제
     @Transactional
     @Override
-    public void deleteRoom(Long roomID) {
+    public void remove(Long roomID) {
+        log.info("RoomInfoService - remove");
+        log.info("roomID : " + roomID);
+
         memberInRoomRepository.deleteInRoom(roomID);
         roomInfoRepository.deleteRoom(roomID);
     }
@@ -107,6 +112,8 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 내 모임 리스트
     @Override
     public List<MyRoomDTO> myRoomList(String memberID) {
+        log.info("RoomInfoService - myRoomList");
+        log.info("memberID : " + memberID);
 
         List<Object[]> myList = roomInfoRepository.getMyList(memberID,Sort.by("id").descending());
 
@@ -135,19 +142,25 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     // 모임 다시 모집
     @Override
     public void reStartRoom(Long roomID) {
+        log.info("RoomInfoService - reStartRoom");
+        log.info("roomID : " + roomID);
+
         roomInfoRepository.reStartRoom(roomID);
     }
 
     // 모임 모집 마감
     @Override
     public void endRoom(Long roomID) {
+        log.info("RoomInfoService - endRoom");
+        log.info("roomID : " + roomID);
+
         roomInfoRepository.endRoom(roomID);
     }
 
     // 모집 임박 리스트 출력
     @Override
     public List<RoomInfoDTO> hotRoomList(String memberID) {
-
+        log.info("RoomInfoService - hotRoomList");
         log.info("memberID : " + memberID);
 
         Optional<Integer> getSchoolNum = memberRepository.getSchoolNum(memberID);

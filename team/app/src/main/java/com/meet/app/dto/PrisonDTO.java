@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class PrisonDTO {
 
-    private Long id;
+    private Long prisonID;
 
     private String title;
 

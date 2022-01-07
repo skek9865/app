@@ -5,9 +5,9 @@ import com.meet.app.entity.Category;
 
 public interface CategoryService {
 
-    void categoryRegister(CategoryDTO categoryDTO);
+    void register(CategoryDTO categoryDTO);
 
-    CategoryDTO categoryRead(Long id);
+    CategoryDTO getOne(Long id);
 
     void categoryCount(Long id);
 

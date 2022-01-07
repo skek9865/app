@@ -23,12 +23,15 @@ public class PrisonServiceImpl implements PrisonService{
 
     @Override
     public void register(PrisonDTO prisonDTO, String memberID) {
-
+        log.info("PrisonService - register");
         log.info("prisonDTO : " + prisonDTO);
 
         Optional<Member> member1 = memberRepository.findById(memberID);
         Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
+<<<<<<< HEAD
 
+=======
+>>>>>>> 435d3c240d13ce9d50b012f555db2749deb92105
 
         Member member = member1.get();
         Member badMember = member2.get();
@@ -38,8 +41,8 @@ public class PrisonServiceImpl implements PrisonService{
     }
 
     @Override
-    public PrisonDTO get(Long id) {
-
+    public PrisonDTO getOne(Long id) {
+        log.info("PrisonService - getOne");
         log.info("id : " + id);
 
         Optional<Prison> result = prisonRepository.findById(id);
@@ -52,6 +55,8 @@ public class PrisonServiceImpl implements PrisonService{
 
     @Override
     public List<PrisonDTO> getList() {
+        log.info("PrisonService - getList");
+
         List<Prison> prisons = prisonRepository.findAll();
 
         List<PrisonDTO> prisonDTOS = new ArrayList<>();
@@ -65,7 +70,11 @@ public class PrisonServiceImpl implements PrisonService{
 
     @Override
     public void modify(PrisonDTO prisonDTO, String memberID) {
-        Optional<Prison> result = prisonRepository.findById(prisonDTO.getId());
+        log.info("PrisonService - modify");
+        log.info("PrisonDTO : " + prisonDTO);
+        log.info("memberID : " + memberID);
+
+        Optional<Prison> result = prisonRepository.findById(prisonDTO.getPrisonID());
         Optional<Member> member1 = memberRepository.findById(memberID);
         Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
 
@@ -85,8 +94,8 @@ public class PrisonServiceImpl implements PrisonService{
     }
 
     @Override
-    public void delete(Long id) {
-
+    public void remove(Long id) {
+        log.info("PrisonService - remove");
         log.info("id : " + id);
 
         prisonRepository.deleteById(id);

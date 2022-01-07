@@ -19,6 +19,8 @@ public class MemberInRoomController {
     // 모임 참가
     @PutMapping("/inRoom")
     public ResponseEntity<Boolean> inRoom(@RequestBody MemberInRoomDTO memberInRoomDTO){
+        log.info("MemberInRoomController - inRoom");
+        log.info("memberInRoomDTO : " + memberInRoomDTO);
 
         Boolean result = memberInRoomService.inRoom(memberInRoomDTO.getRoomID(), memberInRoomDTO.getMemberID());
 
@@ -28,6 +30,8 @@ public class MemberInRoomController {
     // 모임 탈퇴
     @PutMapping("/outRoom")
     public ResponseEntity<Boolean> outRoom(@RequestBody MemberInRoomDTO memberInRoomDTO){
+        log.info("MemberInRoomController - outRoom");
+        log.info("memberInRoomDTO : " + memberInRoomDTO);
 
         Boolean result = memberInRoomService.outRoom(memberInRoomDTO.getRoomID(), memberInRoomDTO.getMemberID());
 

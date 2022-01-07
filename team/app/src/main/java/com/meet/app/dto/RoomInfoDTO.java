@@ -1,6 +1,5 @@
 package com.meet.app.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 public class RoomInfoDTO {
 
-    private Long id;
+    private Long roomID;
 
     private String title;
 

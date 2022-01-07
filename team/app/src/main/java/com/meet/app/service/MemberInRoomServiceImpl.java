@@ -24,6 +24,9 @@ public class MemberInRoomServiceImpl implements MemberInRoomService{
     @Transactional
     @Override
     public Boolean inRoom(Long roomID, String memberID) {
+        log.info("MemberInRoomService - inRoom");
+        log.info("roomID : " + roomID);
+        log.info("memberID : " + memberID);
 
         List<MemberInRoom> memberRooms = memberInRoomRepository.getMemberRoom(roomID);
 
@@ -53,6 +56,9 @@ public class MemberInRoomServiceImpl implements MemberInRoomService{
     @Transactional
     @Override
     public Boolean outRoom(Long roomID, String memberID) {
+        log.info("MemberInRoomService - outRoom");
+        log.info("roomID : " + roomID);
+        log.info("memberID : " + memberID);
 
         List<MemberInRoom> memberRooms = memberInRoomRepository.getMemberRoom(roomID);
 

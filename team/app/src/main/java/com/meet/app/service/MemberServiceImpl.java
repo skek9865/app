@@ -5,7 +5,7 @@ import com.meet.app.entity.Member;
 import com.meet.app.entity.School;
 import com.meet.app.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
     // 회원 등록
     @Override
     public void register(MemberDTO memberDTO) {
-
+        log.info("MemberService - register");
         log.info("memberDTO : " + memberDTO);
 
         String encodePassword = passwordEncoder.encode(memberDTO.getPassword());
@@ -49,6 +49,9 @@ public class MemberServiceImpl implements MemberService {
     // 회원 로그인
     @Override
     public Member login(Map<String, String> member) {
+        log.info("MemberService - login");
+        log.info("member : " + member);
+
         Member findMember = memberRepository.findById(member.get("id"))
                 .orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 아이디입니다"));
 
@@ -61,6 +64,7 @@ public class MemberServiceImpl implements MemberService {
     // 회원 리스트
     @Override
     public List<MemberDTO> getList() {
+        log.info("MemberService - getList");
 
         List<Member> all = memberRepository.findAll();
 
@@ -78,9 +82,10 @@ public class MemberServiceImpl implements MemberService {
 
     // 회원 조회
     @Override
-    public MemberDTO getMember(String id) {
+    public MemberDTO getOne(String id) {
+        log.info("MemberService - getOne");
+        log.info("id : " + id);
 
-//        Member member = memberRepository.findById(id).get();
         Member member = memberRepository.findById(id).get();
 
         MemberDTO memberDTO = entityToDTO(member);
@@ -90,7 +95,10 @@ public class MemberServiceImpl implements MemberService {
 
     // 회원 정보 수정
     @Override
-    public void modifyMember(MemberDTO memberDTO) {
+    public void modify(MemberDTO memberDTO) {
+        log.info("MemberService - modify");
+        log.info("memberDTO : " + memberDTO);
+
         Member member = memberRepository.findById(memberDTO.getMemberID()).get();
 
         member.modifyUser(memberDTO.getNickname(), passwordEncoder.encode(memberDTO.getPassword()));
@@ -98,7 +106,10 @@ public class MemberServiceImpl implements MemberService {
 
     //회원 삭제
     @Override
-    public void deleteMember(MemberDTO memberDTO) {
+    public void remove(MemberDTO memberDTO) {
+        log.info("MemberService - getList");
+        log.info("memberDTO : " + memberDTO);
+
         Member member = memberRepository.findById(memberDTO.getMemberID()).get();
 
         member.deleteUser();

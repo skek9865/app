@@ -10,13 +10,13 @@ public interface PrisonService {
 
     void register(PrisonDTO prisonDTO, String memberID);
 
-    PrisonDTO get(Long id);
+    PrisonDTO getOne(Long id);
 
     List<PrisonDTO> getList();
 
     void modify(PrisonDTO prisonDTO, String memberID);
 
-    void delete(Long id);
+    void remove(Long id);
 
     default Prison dtoToEntity(PrisonDTO prisonDTO, Member member, Member badMember){
 
@@ -33,7 +33,7 @@ public interface PrisonService {
     default PrisonDTO entityToDTO(Prison prison){
 
         PrisonDTO prisonDTO = PrisonDTO.builder()
-                .id(prison.getId())
+                .prisonID(prison.getId())
                 .title(prison.getTitle())
                 .content(prison.getContent())
                 .memberID(prison.getMember().getId())

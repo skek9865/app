@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class SchoolDTO {
 
-    private Integer id;
+    private Integer schoolID;
 
     private String name;
 }

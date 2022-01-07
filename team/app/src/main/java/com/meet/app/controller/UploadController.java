@@ -4,7 +4,7 @@
 //import com.meet.app.service.S3Uploader;
 //
 //import lombok.RequiredArgsConstructor;
-//import lombok.extern.log4j.Log4j2;
+//import lombok.extern.slf4j.Slf4j;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@
 //
 //
 //@RestController
-//@Log4j2
+//@Slf4j
 //@RequestMapping("/file")
 //@RequiredArgsConstructor
 //public class UploadController {
@@ -22,6 +22,8 @@
 //
 //    @PostMapping("/upload")
 //    public HttpStatus uploadFile(@RequestBody RoomFaceImageDTO roomFaceImageDTO) throws IOException {
+//        log.info("UploadController - uploadFile");
+//        log.info("roomFaceImageDTO : " + roomFaceImageDTO);
 //
 //        s3Uploader.upload(roomFaceImageDTO, "static");
 //
@@ -30,6 +32,8 @@
 //
 //    @GetMapping("/getImg/{roomID}")
 //    public ResponseEntity<String> getImg(@PathVariable("roomID") Long roomID){
+//        log.info("UploadController - getImg");
+//        log.info("id : " + roomID);
 //
 //        String result = s3Uploader.getImg(roomID);
 //

@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface RoomInfoService {
 
-    Long roomRegister(RoomInfoDTO roomInfoDTO);
+    Long register(RoomInfoDTO roomInfoDTO);
 
-    List<RoomInfoDTO> roomList(String memberID);
+    List<RoomInfoDTO> getList(String memberID);
 
-    RoomInfoDTO roomRead(Long roomID);
+    RoomInfoDTO getOne(Long roomID);
 
-    void deleteRoom(Long roomID);
+    void remove(Long roomID);
 
     List<MyRoomDTO> myRoomList(String memberID);
 
@@ -29,7 +29,7 @@ public interface RoomInfoService {
     default RoomInfoDTO entityToDTO(RoomInfo roomInfo, String memberID){
 
         RoomInfoDTO roomInfoDTO = RoomInfoDTO.builder()
-                .id(roomInfo.getId())
+                .roomID(roomInfo.getId())
                 .title(roomInfo.getTitle())
                 .periodic(roomInfo.isPeriodic())
                 .startDate(roomInfo.getStartDate())

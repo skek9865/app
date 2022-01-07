@@ -18,7 +18,9 @@ public class CategoryServiceImpl implements CategoryService{
 
     // 카테고리 추가
     @Override
-    public void categoryRegister(CategoryDTO categoryDTO) {
+    public void register(CategoryDTO categoryDTO) {
+        log.info("CategoryService - register");
+        log.info("categoryDTO : " + categoryDTO);
 
         Category category = dtoToEntity(categoryDTO);
 
@@ -27,7 +29,9 @@ public class CategoryServiceImpl implements CategoryService{
 
     // 카테고리 불러오기
     @Override
-    public CategoryDTO categoryRead(Long id) {
+    public CategoryDTO getOne(Long id) {
+        log.info("CategoryService - getOne");
+        log.info("id : " + id);
 
         Optional<Category> result = categoryRepository.findById(id);
 
@@ -40,6 +44,8 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void categoryCount(Long id) {
+        log.info("CategoryService - categoryCount");
+        log.info("id : " + id);
 
         categoryRepository.plusCount(id);
     }

@@ -100,7 +100,6 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     @Transactional
     @Override
     public void deleteRoom(Long roomID) {
-
         memberInRoomRepository.deleteInRoom(roomID);
         roomInfoRepository.deleteRoom(roomID);
     }

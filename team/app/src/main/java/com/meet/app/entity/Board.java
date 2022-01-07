@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -31,4 +33,7 @@ public class Board extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     private Member member;
+
+    @OneToMany(mappedBy ="board")
+    private List<RoomActivityImage> roomActivityImages = new ArrayList<>();
 }

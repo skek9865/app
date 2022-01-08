@@ -6,17 +6,17 @@ import com.meet.app.entity.Member;
 import com.meet.app.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@Log4j2
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-    private final MemberSer
 
     private final MemberService memberService;
     private final JwtTokenProvider jwtTokenProvider;

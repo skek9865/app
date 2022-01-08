@@ -1,5 +1,6 @@
 package com.meet.app.controller;
 
+import com.meet.app.dto.BoardDTO;
 import com.meet.app.dto.MemberDTO;
 import com.meet.app.dto.PrisonDTO;
 import com.meet.app.entity.Board;
@@ -7,7 +8,9 @@ import com.meet.app.entity.Member;
 import com.meet.app.entity.RoomInfo;
 import com.meet.app.repository.BoardRepository;
 import com.meet.app.repository.MemberRepository;
+import com.meet.app.repository.PrisonRepository;
 import com.meet.app.repository.RoomInfoRepository;
+import com.meet.app.service.BoardService;
 import com.meet.app.service.MemberService;
 import com.meet.app.service.PrisonService;
 import com.meet.app.service.RoomInfoService;
@@ -33,12 +36,14 @@ public class AdminController {
     private final RoomInfoRepository roomInfoRepository;
 
     //게시판 관리
+    private final BoardService boardService;
     private final BoardRepository boardRepository;
 
     //채팅방 관리
 
     //신고 관리
     private final PrisonService prisonService;
+    private final PrisonRepository prisonRepository;
 
     //----------------- 회원 관리 -------------------------
 
@@ -70,14 +75,6 @@ public class AdminController {
         return roomInfoRepository.findAll();
     }
 
-//    @GetMapping("/room/board/{id}")
-//    public List<BoardDTO> getBoardList(@PathVariable("id") Long id) {
-//
-//    }
-
-
-    @DeleteMapping("/room/remove/{id}")
-
     @PutMapping("/room/remove/{id}")
     public void removeRoom(@PathVariable("id") Long id) {
         log.info("AdminController - removeRoom" +roomInfoService.getOne(id));
@@ -87,13 +84,13 @@ public class AdminController {
 
     // --------------- 게시판 관리 ---------------------------
 
-    @GetMapping("/board")
-    public List<Board> getBoardList() {
-        log.info("AdminController - BoardList");
-        return boardRepository.findAll();
+    @GetMapping("/room/board/{id}")
+    public List<BoardDTO> getBoardList(@PathVariable("id") Long id) {
+        log.info("AdminController - BoardList" +id);
+        return boardService.getList(roomInfoRepository.findById(id).get());
     }
 
-    @DeleteMapping("/board/remove/{id}")
+    @DeleteMapping("/room/board/remove/{id}")
     public void removeBoard(@PathVariable("id") Long id) {
         log.info("AdminController - BoardRemove" + boardRepository.findById(id).get());
         log.info("id : " + id);

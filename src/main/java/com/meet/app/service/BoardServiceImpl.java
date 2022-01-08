@@ -29,6 +29,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void register(BoardDTO boardDTO) {
+        log.info("BoardService - register");
+
 
         // 방장이 맞는지 확인
         Member findMember = memberRepository.findById(boardDTO.getMemberID()).get();
@@ -45,14 +47,15 @@ public class BoardServiceImpl implements BoardService{
                 .member(findMember)
                 .roomInfo(roomInfo)
                 .build();
-
-        log.info("register board" + boardDTO);
+        log.info("boardDTO : " +boardDTO);
 
         boardRepository.save(board);
     }
 
     @Override
-    public List<BoardDTO> getBoardList(RoomInfo roomInfo) {
+    public List<BoardDTO> getList(RoomInfo roomInfo) {
+        log.info("BoardService - getList");
+
         List<Board> boardList = boardRepository.getList(roomInfo.getId());
 
         List<BoardDTO> boardDTOList = new ArrayList<>();
@@ -61,5 +64,13 @@ public class BoardServiceImpl implements BoardService{
         }
 
         return boardDTOList;
+    }
+
+    @Override
+    public BoardDTO getOne(Long id) {
+        log.info("BoardService - getOne");
+
+        Board board = boardRepository.findById(id).get();
+        return entityToDTO(board);
     }
 }

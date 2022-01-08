@@ -10,7 +10,9 @@ import java.util.List;
 public interface BoardService {
     void register(BoardDTO boardDTO);
 
-    List<BoardDTO> getBoardList(RoomInfo roomInfo);
+    List<BoardDTO> getList(RoomInfo roomInfo);
+
+    BoardDTO getOne(Long id);
 
     default BoardDTO entityToDTO(Board board) {
         return BoardDTO.builder()

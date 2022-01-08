@@ -28,10 +28,7 @@ public class PrisonServiceImpl implements PrisonService{
 
         Optional<Member> member1 = memberRepository.findById(memberID);
         Optional<Member> member2 = memberRepository.findById(prisonDTO.getBadMemberID());
-<<<<<<< HEAD
 
-=======
->>>>>>> 435d3c240d13ce9d50b012f555db2749deb92105
 
         Member member = member1.get();
         Member badMember = member2.get();
